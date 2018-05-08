@@ -13,12 +13,15 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      :items="products"
+      v-bind:items="products"
       :search="search"
     >
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">$ {{ props.item.price }}</td>
+        <td>{{ props.item.producto }}</td>
+        <td class="text-xs-right">{{ props.item.precio }}</td>
+        <td class="text-xs-right">
+          <a :href='props.item.carrito' target='_blank'><i class="fa fa-shopping-cart" />~</a>
+        </td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
         La búsqueda "{{ search }}" no arrojó resultados.
@@ -28,7 +31,19 @@
 </template>
 
 <script>
+import * as Papa from 'papaparse'
+
 export default {
+
+  created () {
+    Papa.parse('static/precios.csv', {
+      download: true,
+      header: true,
+      complete: (results) => {
+        this.products = results.data
+      }
+    })
+  },
   data () {
     return {
       search: '',
@@ -37,67 +52,22 @@ export default {
           text: 'Producto',
           align: 'left',
           sortable: true,
-          value: 'name'
+          value: 'Producto'
         },
         {
           text: 'Precio (AR$)',
           align: 'left',
           sortable: true,
-          value: 'price'
+          value: 'Precio'
+        },
+        {
+          text: 'Agregar al carrito',
+          align: 'left',
+          sortable: false,
+          value: 'carrito'
         }
       ],
-      products: [
-        {
-          value: false,
-          name: 'Frozen Yogurt',
-          price: 159
-        },
-        {
-          value: false,
-          name: 'Ice cream sandwich',
-          price: 237
-        },
-        {
-          value: false,
-          name: 'Eclair',
-          price: 262
-        },
-        {
-          value: false,
-          name: 'Cupcake',
-          price: 305
-        },
-        {
-          value: false,
-          name: 'Gingerbread',
-          price: 356
-        },
-        {
-          value: false,
-          name: 'Jelly bean',
-          price: 375
-        },
-        {
-          value: false,
-          name: 'Lollipop',
-          price: 392
-        },
-        {
-          value: false,
-          name: 'Honeycomb',
-          price: 408
-        },
-        {
-          value: false,
-          name: 'Donut',
-          price: 452
-        },
-        {
-          value: false,
-          name: 'KitKat',
-          price: 518
-        }
-      ]
+      products: []
     }
   }
 }
