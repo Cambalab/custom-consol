@@ -126,8 +126,6 @@ i"T$P^T888aaa.._                   /   .-'\. ./'-.   \                    _..eee
                          .' _ . /             \     '.
                         (_i-i/_i               i_\i-i_)                                */
 
-
-
 .header img {
   display: block;
   margin-bottom: 5px;
