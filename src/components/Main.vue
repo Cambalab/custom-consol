@@ -15,6 +15,7 @@
       :headers="headers"
       v-bind:items="products"
       :search="search"
+      :rows-per-page-items="[20]"
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.producto }}</td>
@@ -40,7 +41,9 @@ export default {
       download: true,
       header: true,
       complete: (results) => {
-        this.products = results.data
+        this.products = results.data.filter((elem) => {
+          return elem.producto
+        })
       }
     })
   },
@@ -52,13 +55,13 @@ export default {
           text: 'Producto',
           align: 'left',
           sortable: true,
-          value: 'Producto'
+          value: 'producto'
         },
         {
           text: 'Precio (AR$)',
           align: 'left',
           sortable: true,
-          value: 'Precio'
+          value: 'precio'
         },
         {
           text: 'Agregar al carrito',
@@ -88,8 +91,5 @@ li {
 }
 a {
   color: #42b983;
-}
-v-icon {
-  color: #fa6607
 }
 </style>
