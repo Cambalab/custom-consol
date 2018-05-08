@@ -20,7 +20,7 @@
         <td>{{ props.item.producto }}</td>
         <td class="text-xs-right">{{ props.item.precio }}</td>
         <td class="text-xs-right">
-          <a :href='props.item.carrito' target='_blank'><i class="fa fa-shopping-cart" />~</a>
+          <a :href='props.item.carrito' target="_blank"><v-icon color="orange darken-2">shopping_cart</v-icon></a>
         </td>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
@@ -88,5 +88,8 @@ li {
 }
 a {
   color: #42b983;
+}
+v-icon {
+  color: #fa6607
 }
 </style>
