@@ -16,9 +16,10 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      v-bind:items="products"
+      :items="products"
       :search="search"
       :rows-per-page-items="[20]"
+      :disable-initial-sort="true"
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.producto }}</td>
