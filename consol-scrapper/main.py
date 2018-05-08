@@ -21,6 +21,6 @@ for categoria in categorias:
 
 with open('static/precios.csv', 'wb') as myfile:
     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-    wr.writerow(('Producto', 'Precio', 'Agregar al carrito'))
+    wr.writerow(('producto', 'precio', 'carrito'))
     for key, value in productos.items():
         wr.writerow([key, value[0], value[1]])
