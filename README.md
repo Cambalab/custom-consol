@@ -1,8 +1,8 @@
-# productos-consol
+# **ConsoLog**
 
-> A Vue.js project
+## **[How to contribute](/CONTRIBUTING.md)**
 
-## Build Setup
+## **Build Setup**
 
 ``` bash
 # install dependencies

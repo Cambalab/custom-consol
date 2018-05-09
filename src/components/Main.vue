@@ -16,13 +16,14 @@
     </v-card-title>
     <v-data-table
       :headers="headers"
-      v-bind:items="products"
+      :items="products"
       :search="search"
       :rows-per-page-items="[20]"
+      :disable-initial-sort="true"
     >
       <template slot="items" slot-scope="props">
         <td>{{ props.item.producto }}</td>
-        <td class="text-xs-right">{{ props.item.precio }}</td>
+        <td class="text-xs-right">{{ props.item.precioHumanReadable }}</td>
         <td class="text-xs-right">
           <a :href='props.item.carrito' target="_blank"><v-icon color="orange darken-2">shopping_cart</v-icon></a>
         </td>
@@ -38,14 +39,18 @@
 import * as Papa from 'papaparse'
 
 export default {
-
   created () {
     Papa.parse('static/precios.csv', {
       download: true,
       header: true,
       complete: (results) => {
         this.products = results.data.filter((elem) => {
-          return elem.producto
+          return elem.precio
+        })
+        this.products = this.products.map((elem) => {
+          elem.precioHumanReadable = elem.precio
+          elem.precio = parseFloat(elem.precio.substr(1).replace(',', '.'))
+          return elem
         })
       }
     })
