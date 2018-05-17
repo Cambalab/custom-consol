@@ -5,7 +5,6 @@ sys.setdefaultencoding('utf-8')
 
 def update_products():
     categorias = ['almacen', 'bebidas', 'cooperativos', 'fiambreria', 'frescos', 'limpieza', 'organicos', 'sin-tacc', 'todos']
-    categorias = ['sin-tacc']
     productos = {}
     for categoria in categorias:
         for i in xrange(1, sys.maxint):
